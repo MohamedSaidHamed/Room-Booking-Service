@@ -20,11 +20,13 @@ public class BookingCalendarService {
     public List<BookingCalendar> getBookingsByRoomIdAndActive(Room roomId, boolean active) {
         return bookingCalendarRepo.findAllByRoomAndActive(roomId, active);
     }
+
     public List<BookingCalendar> getBookingsByActive(boolean active) {
         return bookingCalendarRepo.findAllByActive(active);
     }
+
     public BookingCalendar getBookingByIdAndActive(int id, boolean active) {
-        return bookingCalendarRepo.findByIdAndActive(id,active);
+        return bookingCalendarRepo.findByIdAndActive(id, active);
     }
 
     public BookingCalendar updateBooking(Room room, Date checkin, Date checkout) {
@@ -38,6 +40,7 @@ public class BookingCalendarService {
         bookingCalendar.setActive(true);
         return bookingCalendarRepo.save(bookingCalendar);
     }
+
     public BookingCalendar deleteBooking(BookingCalendar bookingCalendar) {
         bookingCalendar.setActive(false);
         return bookingCalendarRepo.save(bookingCalendar);

@@ -24,21 +24,21 @@ public class BookingCalendarController {
     @PostMapping(value = "/booking")
     public BookingCalendar roomBooking(@RequestParam int roomId, @RequestParam Date checkin, @RequestParam Date checkout) {
         Room room = roomService.getRoomById(roomId);
-        if (room == null){
+        if (room == null) {
             throw new RoomNotFoundException();
         }
         return bookingCalendarService.updateBooking(room, checkin, checkout);
     }
 
     @GetMapping(value = "/bookings")
-    public List<BookingCalendar> getAllActiveBookings(){
+    public List<BookingCalendar> getAllActiveBookings() {
         return bookingCalendarService.getBookingsByActive(true);
     }
 
     @DeleteMapping(value = "bookings/{id}")
-    public ResponseEntity deleteBooking(@PathVariable int id){
+    public ResponseEntity deleteBooking(@PathVariable int id) {
         BookingCalendar bookingCalendar = bookingCalendarService.getBookingByIdAndActive(id, true);
-        if (bookingCalendar == null){
+        if (bookingCalendar == null) {
             throw new BookingNotFoundException("INVALID_BOOKING_ID");
         }
         bookingCalendarService.deleteBooking(bookingCalendar);
