@@ -36,7 +36,7 @@ public class BookingCalendarService {
         bookingCalendar.setCheckoutDate(checkout);
         Period period = Period.between(convertToLocalDateViaInstant(checkin),
                 convertToLocalDateViaInstant(checkout));
-        bookingCalendar.setPeriod((double) period.getDays());
+        bookingCalendar.setPeriod(period.getDays());
         bookingCalendar.setActive(true);
         return bookingCalendarRepo.save(bookingCalendar);
     }

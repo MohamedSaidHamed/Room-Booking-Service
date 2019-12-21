@@ -22,7 +22,7 @@ public class BookingCalendar implements Serializable {
     @Column(name = "checkoutDate")
     private Date checkoutDate;
     @Column(name = "period")
-    private Double period;
+    private Integer period;
     @JsonIgnore
     @Column(name = "active")
     private Boolean active;
@@ -60,11 +60,11 @@ public class BookingCalendar implements Serializable {
         this.checkoutDate = checkoutDate;
     }
 
-    public Double getPeriod() {
+    public Integer getPeriod() {
         return period;
     }
 
-    public void setPeriod(Double period) {
+    public void setPeriod(Integer period) {
         this.period = period;
     }
 
