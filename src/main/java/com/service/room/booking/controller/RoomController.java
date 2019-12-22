@@ -15,11 +15,22 @@ public class RoomController {
     @Autowired
     private RoomService roomService;
 
+    /**
+     * A method to return all available rooms with each room active bookings
+     *
+     * @return
+     */
     @GetMapping(value = "/rooms")
     public List<Room> getAllRooms() {
         return roomService.getAllRooms();
     }
 
+    /**
+     * A method to create a new room
+     *
+     * @param type
+     * @return
+     */
     @PostMapping(value = "/createRoom/{type}")
     public Room createRoom(@PathVariable String type) {
         return roomService.createRoom(type);

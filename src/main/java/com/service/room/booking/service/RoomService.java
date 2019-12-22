@@ -16,18 +16,30 @@ public class RoomService {
     @Autowired
     private BookingCalendarService bookingCalendarService;
 
+    /**
+     * A method to get all available rooms with each room bookings
+     * @return
+     */
     public List<Room> getAllRooms() {
         List<Room> roomList = roomRepo.findAll();
         roomList.stream().forEach(room -> {
-            room.setBookingCalendarList(bookingCalendarService.getBookingsByRoomIdAndActive(room, true));
+            room.setBookingCalendarList(bookingCalendarService.getBookingsByRoomAndActive(room, true));
         });
         return roomList;
     }
 
+    /**
+     * @param roomId
+     * @return
+     */
     public Room getRoomById(int roomId) {
         return roomRepo.findById(roomId).get();
     }
 
+    /**
+     * @param type
+     * @return
+     */
     public Room createRoom(String type) {
         Room room = new Room();
         room.setType(RoomType.valueOf(type));

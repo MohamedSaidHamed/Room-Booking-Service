@@ -21,20 +21,39 @@ public class BookingCalendarController {
     @Autowired
     private RoomService roomService;
 
+    /**
+     * A method to create a new booking for an existing room.
+     *
+     * @param roomId
+     * @param checkin
+     * @param checkout
+     * @return
+     */
     @PostMapping(value = "/booking")
     public BookingCalendar roomBooking(@RequestParam int roomId, @RequestParam Date checkin, @RequestParam Date checkout) {
         Room room = roomService.getRoomById(roomId);
         if (room == null) {
-            throw new RoomNotFoundException();
+            throw new RoomNotFoundException("INVALID_ROOM_ID");
         }
         return bookingCalendarService.updateBooking(room, checkin, checkout);
     }
 
+    /**
+     * A method to return all active bookings.
+     *
+     * @return
+     */
     @GetMapping(value = "/bookings")
     public List<BookingCalendar> getAllActiveBookings() {
         return bookingCalendarService.getBookingsByActive(true);
     }
 
+    /**
+     * A method to delete "mark as Inactive, not entirely delete" a booking based on the provided booking id.
+     *
+     * @param id
+     * @return
+     */
     @DeleteMapping(value = "bookings/{id}")
     public ResponseEntity deleteBooking(@PathVariable int id) {
         BookingCalendar bookingCalendar = bookingCalendarService.getBookingByIdAndActive(id, true);
